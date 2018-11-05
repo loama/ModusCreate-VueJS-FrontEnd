@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "lts/*"
+install:
+  - npm install
+  - npm run build
+  - npm run test
+deploy:
+  provider: firebase
+  token:
+    secure: "1/g9w5wSGOsS7i6o2rEpcPi5jSioRCISvasSOFDJvA4yc"
+  project: "modus-car-frontend"
+script:
+  - firebase deploy  
