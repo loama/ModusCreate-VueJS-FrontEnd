@@ -65,7 +65,7 @@
 
 <script>
 const axios = require('axios')
-const api = 'https://one.nhtsa.gov/webapi/api/SafetyRatings'
+const api = 'https://api.modus.com.mx/cors/'
 
 export default {
   name: 'Search',
