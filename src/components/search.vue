@@ -5,7 +5,7 @@
       <div class="year"> {{years.selected}}</div>
       <div class="years"></div>
 
-      <div class="manufacturer"></div>
+      <div class="manufacturer">{{manufacturers.selected}}</div>
 
       <div class="model"></div>
     </div>
@@ -17,6 +17,9 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      manufacturers: {
+        selected: 'Audi'
+      },
       years: {
         selected: 2018
       },
@@ -45,12 +48,25 @@ export default {
     background: #FFFFFF
     border-radius: 8px
     box-shadow: 0 1px 3px #888
+    font-weight: 600
+    font-size: 16px
+    line-height: 48px
 
     .year
       position: absolute
       top: 0
       left: 0
       height: 100%
-      width: 120px
+      width: 100px
       border-right: 1px solid #E0E0E0
+      cursor: pointer
+
+    .manufacturer
+      position: absolute
+      top: 0
+      left: 100px
+      height: 100%
+      width: 100px
+      border-right: 1px solid #E0E0E0
+      cursor: pointer
 </style>
