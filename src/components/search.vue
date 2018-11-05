@@ -1,7 +1,11 @@
 <template>
   <div class="search">
     <img src="../assets/modus-text.svg">
-    <div class="searchbar"></div>
+    <div class="searchbar">
+      <div class="year"></div>
+      <div class="manufacturer"></div>
+      <div class="model"></div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +33,7 @@ export default {
     position: absolute
     top: 240px
     left: calc(50vw - 250px)
-    height: 56px
+    height: 48px
     width: 500px
     max-width: calc(100vw - 32px)
     background: #FFFFFF
