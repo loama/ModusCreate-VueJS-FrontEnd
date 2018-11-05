@@ -7,7 +7,9 @@
 
       <div class="manufacturer">{{manufacturers.selected}}</div>
 
-      <div class="model"></div>
+      <div class="model">
+        <input type="text">
+      </div>
     </div>
   </div>
 </template>
@@ -74,4 +76,8 @@ export default {
       width: 100px
       border-right: 1px solid #E0E0E0
       cursor: pointer
+
+      &:hover
+        background: #328AFD
+        color: #FFF
 </style>
