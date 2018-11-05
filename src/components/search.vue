@@ -60,6 +60,11 @@ export default {
       width: 100px
       border-right: 1px solid #E0E0E0
       cursor: pointer
+      border-radius: 8px 0 0 8px
+
+      &:hover
+        background: #328AFD
+        color: #FFF
 
     .manufacturer
       position: absolute
