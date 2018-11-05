@@ -3,7 +3,9 @@
     <img src="../assets/modus-text.svg">
     <div class="searchbar">
       <div class="year"> {{years.selected}}</div>
-      <div class="years"></div>
+      <div class="years">
+        <div v-for="year in years.all" v-bind:key="year">{{year}}</div>
+      </div>
 
       <div class="manufacturer">{{manufacturers.selected}}</div>
 
@@ -23,7 +25,8 @@ export default {
         selected: 'Audi'
       },
       years: {
-        selected: 2018
+        selected: 2018,
+        all: [2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]
       },
       msg: ''
     }
@@ -56,6 +59,7 @@ export default {
 
     .year
       position: absolute
+      z-index: 101
       top: 0
       left: 0
       height: 100%
@@ -67,6 +71,27 @@ export default {
       &:hover
         background: #328AFD
         color: #FFF
+
+    .years
+      position: absolute
+      z-index: 100
+      top: 48px
+      left: 0
+      border-radius: 0 0 8px 8px
+      border: 1px solid #E0E0E0
+      background: #FFFFFF
+      max-height: 220px
+      overflow-y: scroll
+
+      > div
+        height: 48px
+        width: 100px
+        border-top: 1px solid #E0E0E0
+        cursor: pointer
+
+        &:hover
+          background: #328AFD
+          color: #FFF
 
     .manufacturer
       position: absolute
