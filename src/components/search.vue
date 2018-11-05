@@ -2,8 +2,11 @@
   <div class="search">
     <img src="../assets/modus-text.svg">
     <div class="searchbar">
-      <div class="year"></div>
+      <div class="year"> {{years.selected}}</div>
+      <div class="years"></div>
+
       <div class="manufacturer"></div>
+
       <div class="model"></div>
     </div>
   </div>
@@ -14,7 +17,10 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      years: {
+        selected: 2018
+      },
+      msg: ''
     }
   }
 }
@@ -39,4 +45,12 @@ export default {
     background: #FFFFFF
     border-radius: 8px
     box-shadow: 0 1px 3px #888
+
+    .year
+      position: absolute
+      top: 0
+      left: 0
+      height: 100%
+      width: 120px
+      border-right: 1px solid #E0E0E0
 </style>
