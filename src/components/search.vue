@@ -48,7 +48,11 @@
 
       <div class="cards">
         <div class="card" v-for="model in models.options" v-bind:key="model.VehicleId">
-          {{model}}
+          <div v-bind:style="{backgroundImage: 'url(' + modelsComplete.VehiclePicture + ')'}" class="image"></div>
+          <div class="text">
+            <div class="vehicle-description">{{model.VehicleDescription}}</div>
+            <div class="overall-rating"> overall rating: {{modelsComplete.OverallRating}}</div>
+          </div>
         </div>
       </div>
 
@@ -86,6 +90,7 @@ export default {
         open: false,
         options: []
       },
+      modelsComplete: {},
       msg: ''
     }
   },
@@ -117,6 +122,9 @@ export default {
     loadYears () {
       var self = this
       self.years.loading = true
+      self.modelsComplete = {}
+      self.models.selected = ''
+      self.models.all = []
       axios.get(api + '?format=json')
         .then(function (response) {
           // handle success
@@ -136,6 +144,9 @@ export default {
       self.models.loading = true
       self.manufacturers.all = []
       self.manufacturers.selected = ''
+      self.modelsComplete = {}
+      self.models.selected = ''
+      self.models.all = []
       axios.get(api + '/modelyear/' + self.years.selected.toString() + '?format=json')
         .then(function (response) {
           // handle success
@@ -153,7 +164,9 @@ export default {
       var self = this
       self.models.all = []
       self.models.loading = true
+      self.modelsComplete = {}
       self.models.selected = ''
+      self.models.all = []
       axios.get(api + '/modelyear/' + this.years.selected + '/make/' + this.manufacturers.selected + '?format=json')
         .then(function (response) {
           // handle success
@@ -170,15 +183,17 @@ export default {
     selectModel (model) {
       this.models.open = false
       this.models.selected = model
+      this.modelsComplete = {}
       var self = this
       self.models.options = []
       axios.get(api + '/modelyear/' + this.years.selected + '/make/' + this.manufacturers.selected + '/model/' + this.models.selected + '?format=json')
         .then(function (response) {
           self.models.options = response.data.Results
           for (let i = 0; i < response.data.Results.length; i++) {
-            axios.get(api + '/VehicleId/7520?format=json')
+            axios.get(api + '/VehicleId/' + response.data.Results[i]['VehicleId'].toString() + '?format=json')
               .then(function (response) {
-                self.models.options[i].fullData = response.data.Results[i]
+                self.modelsComplete = response.data.Results[0]
+                console.log(response.data.Results[0].VehiclePicture)
               })
           }
         })
@@ -524,7 +539,9 @@ export default {
       height: 200px
       width: 498px
       border: 1px solid #E0E0E0
-      border-radius: 8px
+      border-radius: 0
+      background: #FFFFFF
+      overflow: hidden
 
       &:first-child
         margin-top: 96px
@@ -535,4 +552,31 @@ export default {
 
       &:only-child
         border-radius: 8px
+
+      .image
+        position: absolute
+        top: 0
+        left: 0
+        height: 100%
+        width: 220px
+        background: #A0A0A0
+        background-size: cover
+        background-position: center
+
+      .text
+        position: absolute
+        top: 0
+        left: 220px
+        height: 100%
+        width: 280px
+        padding: 16px
+        text-align: left
+
+      .vehicle-description
+        font-weight: 600
+        font-size: 18px
+        line-height: 24px
+        text-align: left
+
+      .overall-rating
 </style>
