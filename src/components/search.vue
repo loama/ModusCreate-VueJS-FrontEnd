@@ -65,7 +65,8 @@
 
 <script>
 const axios = require('axios')
-const api = 'https://api.modus.com.mx/cors/'
+const api = 'https://modus-api.herokuapp.com/'
+// const api = 'http://localhost:8888/'
 
 export default {
   name: 'Search',
@@ -147,7 +148,7 @@ export default {
       self.modelsComplete = {}
       self.models.selected = ''
       self.models.all = []
-      axios.get(api + '/modelyear/' + self.years.selected.toString() + '?format=json')
+      axios.get(api + 'cors/modelyear/' + self.years.selected.toString() + '?format=json')
         .then(function (response) {
           // handle success
           let manufacturers = []
@@ -167,7 +168,7 @@ export default {
       self.modelsComplete = {}
       self.models.selected = ''
       self.models.all = []
-      axios.get(api + '/modelyear/' + this.years.selected + '/make/' + this.manufacturers.selected + '?format=json')
+      axios.get(api + 'cors/modelyear/' + this.years.selected + '/make/' + this.manufacturers.selected + '?format=json')
         .then(function (response) {
           // handle success
           let models = []
@@ -186,11 +187,11 @@ export default {
       this.modelsComplete = {}
       var self = this
       self.models.options = []
-      axios.get(api + '/modelyear/' + this.years.selected + '/make/' + this.manufacturers.selected + '/model/' + this.models.selected + '?format=json')
+      axios.get(api + 'cors/modelyear/' + this.years.selected + '/make/' + this.manufacturers.selected + '/model/' + this.models.selected + '?format=json')
         .then(function (response) {
           self.models.options = response.data.Results
           for (let i = 0; i < response.data.Results.length; i++) {
-            axios.get(api + '/VehicleId/' + response.data.Results[i]['VehicleId'].toString() + '?format=json')
+            axios.get(api + 'cors/VehicleId/' + response.data.Results[i]['VehicleId'].toString() + '?format=json')
               .then(function (response) {
                 self.modelsComplete = response.data.Results[0]
                 console.log(response.data.Results[0].VehiclePicture)
